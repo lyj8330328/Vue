@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <style>
+        .red{
+            background-color: red;
+        }
+        .blue{
+            background-color: blue;
+        }
+        .yellow{
+            color: yellow;
+        }
+    </style>
+
+</head>
+<body>
+
+    <div id="app">
+        <input type="text" v-model="name" /><br/>
+        <button @click="num++">+</button>
+        <button v-on:click="decrement">-</button>
+        <h1><span v-text="name"></span></h1>
+        <span v-html="'<h1>123123213123</h1>'"></span>
+        <h1>{{num}}</h1>
+
+        <input type="checkbox" v-model="language" value="Java" />Java<br/>
+        <input type="checkbox" v-model="language" value="PHP" />PHP<br/>
+        <input type="checkbox" v-model="language" value="Swift" />Swift<br/>
+        <h1>
+            你选择了：{{language.join(',')}}
+        </h1>
+
+        <div @click.stop="print('div')">
+            <p @click.stop="print('p')">点击</p><br/>
+            <input @keyup.enter="test()" />
+        </div>
+
+        <div>
+            <br/>
+            <button @click="show = !show">点击观看</button>
+
+            <br/>
+            <input type="text" v-model="color"/>
+            <button @click="state = !state">点击换色</button>
+            <ul v-if="show">
+                <li v-if="user.gender==='女'" v-for="(user,index) in users" :key="index">
+                    {{user.name}} : {{user.gender}} : {{user.age}}——————{{index}}
+                </li>
+                <li v-for="(k,v,i) in person">
+                    {{i}}-------{{v}}:{{k}}
+                </li>
+            </ul>
+        </div>
+        <div style="height: 100px;width: 100px" v-bind:class="color">
+            <p>dasdsad</p>
+        </div>
+
+        <div style="height: 100px;width: 100px" v-bind:class="{blue:state}">
+
+        </div>
+
+        <h1 v-if="Math.random() >0.5">
+            大
+        </h1>
+        <h1 v-else>小</h1>
+        <h1>{{getDate}}</h1>
+        <h2>{{dateStr}}</h2>
+    </div>
+
+    <script src="./node_modules/vue/dist/vue.js"></script>
+
+    <script>
+        var vm=new Vue({
+            el:"#app",
+            data:{
+                name:"123asdadasdasdasd",
+                num:1,
+                language: [],
+                users:[
+                    {name:'柳岩', gender:'女', age: 21},
+                    {name:'虎哥', gender:'男', age: 30},
+                    {name:'范冰冰', gender:'女', age: 24},
+                    {name:'刘亦菲', gender:'女', age: 18},
+                    {name:'古力娜扎', gender:'女', age: 25}
+                ],
+                person:{name:'柳岩', gender:'女', age: 21},
+                show:false,
+                color:["red","yellow"],
+                state:true,
+                date:1429032123201,
+                dateStr:"",
+                people:{
+                    name:""
+                }
+            },
+            methods:{
+                decrement(){
+                    this.num--;
+                },
+                print(msg){
+
+                    console.log(msg)
+                },
+                test(){
+                    console.log("点击了回车")
+                }
+            },
+            computed:{
+                getDate(){
+                    const date = new Date(this.date);
+                    return date.getFullYear()+"年"+date.getMonth()+"月"+date.getDay()+"日";
+                }
+            },
+            watch:{
+                date:{
+                    deep:true,
+                    handler(newVal,oldVal){
+                        console.log(newVal);
+                        console.log(oldVal);
+                        const date = new Date(this.date);
+                         this.dateStr=date.getFullYear()+"年"+date.getMonth()+"月"+date.getDay()+"日";
+                    }
+                },
+                people:{
+                    deep:true,
+                    handler(newVal,oldVal){
+                        console.log(newVal.name);
+                        console.log(oldVal.name);
+                        //console.log(val.name);
+                    }
+                },
+                'people.name':{
+
+                }
+            }
+        })
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    // let person={
+    //     name:"jack",
+    //     age:21,
+    // }
+    //
+    // let sayHello = ({name,age}) => {
+    //     console.log(name,age);
+    // }
+    let arr = ['1','2','3','4'];
+    console.log(arr);
+
+    const arr2 = arr.map(str => parseInt(str));
+    console.log(arr2)
+
+    const sum=arr2.reduce((a,b) => a+b,0);
+    console.log(sum);
+
+    const p = new Promise(((resolve, reject) => {
+        setTimeout(function () {
+            let number=Math.random();
+            if(number < 0.5){
+                resolve(number)
+            }else {
+                reject(number)
+            }
+        },1000)
+    }))
+    p.then(data => {
+        console.log("成功了:"+data);
+    }).catch(data => {
+        console.log("失败了:"+data);
+    })
+
+</script>
+</body>
+</html>
