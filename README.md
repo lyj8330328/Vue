@@ -4,4 +4,3 @@
 
 ### [笔记2](https://github.com/lyj8330328/Vue/blob/master/note/webpack.md)
 
-### 进入不同的文件夹先npm install
